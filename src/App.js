@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {useState} from 'react';
 
@@ -32,6 +31,11 @@ function Nav(props) {
     </ol>
   </nav>
 }
+function Create(){
+  return <article>
+    <h2>Create</h2>
+  </article>
+}
 function App() {
   const [mode, setMode] = useState('WELCOME');
   const [id, setId] = useState(null);
@@ -52,6 +56,8 @@ function App() {
       }
     }
     content = <Article title={title} body={body}></Article>
+  } else if(mode === 'CREATE'){
+    content = <Create></Create>
   }
   return (
     <div>
@@ -62,7 +68,11 @@ function App() {
         setMode('READ');
         setId(_id);
       }}></Nav>
-      {content};
+      {content}
+      <a href="/create" onClick={event=>{
+        event.preventDefault();
+        setMode('CREATE');
+      }}>Create</a>
     </div>
   );
 }
